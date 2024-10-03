@@ -1,0 +1,32 @@
+<h4>UPDATE USER</h2>
+<form class="row g-3" action="/users/{{user._id}}?_method=put" method="post">
+            <div class="col-md-6">
+                <label for="inputNamel4" class="form-label">Name</label>
+                <input type="Namel" name="name" class="form-control" value="{{user.name}}" id="inputNamel4">
+            </div>
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" value="{{user.email}}" id="inputEmail4">
+            </div>
+            <div class="col-12">
+                <label for="inputPhone" class="form-label">Phone</label>
+                <input type="text" name="phone" class="form-control" value="{{user.phone}}" id="inputPhone">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                <input type="text" class="form-control" name="address" id="inputAddress" value="{{user.address}}" placeholder="1234 Main St">
+            </div>
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">City</label>
+                <input type="text" class="form-control" name="city" value="{{user.city}}" id="inputCity">
+            </div>
+             <div class="col-md-6">
+                <label for="inputContries" class="form-label">Contries</label>
+                <input type="text" class="form-control" name="contries" value="{{user.contries}}" id="inputContries">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">UPDATE</button>
+            </div>
+        </form>
+
+     

@@ -1,0 +1,144 @@
+<h5>LIST USERS</h5>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">City</th>
+      <th scope="col">Contries</th>
+      <th scope="col" style="width: 200px; text-align:center;">Action</th>
+    </tr>
+  </thead>
+  <tbody id="userList"></tbody>
+</table>
+<nav aria-label="Page navigation example "></nav>
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+{{!-- confirm delete --}}
+<!-- Modal -->
+<div class="modal fade" id="idUser" tabindex="-1" aria-labelledby="idUserLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5"  id="exampleModalLabel">Xóa người dùng?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn chắc chắn muốn xóa người dùng?
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-delete-user"  class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  async function ajaxRequest(url, method, data) {
+            const options = {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            if (data) {
+                options.body = JSON.stringify(data);
+            }
+
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        }
+
+
+        document.getElementById('userForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const contries = document.getElementById('contries').value;
+
+            try {
+                const user = await ajaxRequest('/users/store', 'POST', { name, email, phone, address, city, contries });
+
+                loadUsers();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+
+
+        async function loadUsers() {
+            try {
+                const users = await ajaxRequest('/users/', 'GET');
+                const userList = document.getElementById('userList');
+                userList.innerHTML = '';
+                users.forEach(user => {
+                    userList.innerHTML += `
+                            <tr>
+                                <th scope="row"></th>
+                                <td>${user.name}</td>
+                                <td>${user.address}</td> 
+                                <td>${user.city}</td>
+                                <td>${user.contries}</td>
+                                <td style="text-align: center;">
+                                        <a href="#" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a> | 
+                                        <a href="#" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a> | 
+                                        <a href="#" class="btn btn-danger" data-bs-toggle="modal" id="btnDelete" data-id="${user._id}" data-bs-target="#idUser"><i class="fa-solid fa-trash-can"></i></a> 
+                                </td>
+                                </tr>
+                    `;
+                });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+        document.getElementById('userList').addEventListener('click', function(e) {
+            if (e.target.closest('.btn-danger')) {
+                const userId = e.target.closest('.btn-danger').getAttribute('data-id');
+                document.getElementById('btn-delete-user').setAttribute('data-id', userId);
+            }
+        });
+
+        async function deleteUser() {
+            document.getElementById('btn-delete-user').addEventListener('click', async function(e) {
+                e.preventDefault();
+                const userId = this.getAttribute('data-id');
+                try {
+                    await ajaxRequest(`/users/${userId}`, 'DELETE');
+                    loadUsers();
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('idUser'));
+                    modal.hide();
+                } catch (error) {
+                    alert('Error: ' + error.message);
+                }
+            });
+          }
+
+        window.onload = function() {
+            loadUsers();
+            deleteUser(); 
+        };
+
+</script>

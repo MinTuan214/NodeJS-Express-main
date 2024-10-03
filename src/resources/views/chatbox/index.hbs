@@ -1,0 +1,99 @@
+<div id="main-chat">
+    <div class="container">
+        <div class="box-left">
+            <div class="sidebar-top">
+                <i class="fa-solid fa-power-off"></i>
+                <i class="fa-solid fa-address-book"></i>
+                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-user-group"></i>
+                <i class="fa-solid fa-list"></i>
+            </div>
+            <div class="sidebar-bottom">
+                <i class="fa-solid fa-gear"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+        </div>
+        <div class="box-right">
+            <div class="nav-top">
+                <div class="nav-top-left">
+                    <input type="text" placeholder="Search...">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <div class="add-user">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                </div>
+                <div class="nav-top-right">
+                    <div class="box-user">
+                        <span id="user-name"></span>
+                        <p class="dot"></p>
+
+                        <img src="image/219986.png" alt="">
+                    </div>
+                </div>
+                <div class="clip-path"></div>
+            </div>
+            <div class="content">
+                <div class="box-list-user">
+                    <div class="content-message ">
+                        <div class="left">
+                            <div class="avatar">
+                                <img src="image/219986.png" alt="">
+                            </div>
+                            <div class="name-message">
+                                <span class="name">Nicolas Jackson</span>
+                                <p class="message">Hello!</p>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="time">
+                                <p>12:35</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-chat-user">
+                    <div class="user-texting">
+                        <div class="info-user">
+                            <img src="image/user2.png" alt="">
+                            <div class="name-status">
+                                <p class="name">tuanz123, admin</p>
+                                <p class="status">Online
+                                    <span class="dot"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <i class="fa-solid fa-video"></i>
+                            <i class="fa-solid fa-phone"></i>
+                            <i class="fa-solid fa-bars"></i>
+                        </div>
+                    </div>
+                    <div class="hr-top"></div>
+                    <div class="content-text">
+                        <div class="write-message">
+                            <div class="chat-messages"></div>
+                        </div>
+                        <div class="box-submit-message">
+                            <div class="hr-bot"></div>
+                            <div class="box-write">
+                                <div class="text">
+                                    <input type="text" id="send-message" placeholder="Nhập tin nhắn...">
+                                </div>
+                                <div class="select">
+                                    <div class="icons">
+                                        <i class="fa-regular fa-face-smile"></i>
+                                        <i class="fa-solid fa-plus"></i>
+                                    </div>
+                                    <a class="btn-send"><i class="fa-solid fa-paper-plane"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="module" src="js/ajax/chatbox.js"></script>

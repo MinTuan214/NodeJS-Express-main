@@ -1,0 +1,61 @@
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a href="/" class="navbar-brand fs-4 fw-bold">TABLE USERS</a>
+    <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+
+    <a href="#" class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"><i class="fa-solid fa-user-plus"></i></a>
+  </div>
+  
+</nav>
+{{!-- add --}}
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">ADD USER</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <form class="row g-3" id="userForm" action="/users/store" method="post">
+            <div class="col-md-6">
+                <label for="inputNamel4" class="form-label">Name</label>
+                <input type="Namel" name="name" class="form-control" id="name">
+            </div>
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="email">
+            </div>
+            <div class="col-12">
+                <label for="inputPhone" class="form-label">Phone</label>
+                <input type="text" name="phone" class="form-control" id="phone">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                <input type="text" class="form-control" name="address" id="address" placeholder="1234 Main St">
+            </div>
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">City</label>
+                <input type="text" class="form-control" name="city" id="city">
+            </div>
+             <div class="col-md-6">
+                <label for="inputContries" class="form-label">Contries</label>
+                <input type="text" class="form-control" name="contries" id="contries">
+            </div>
+            <div class="col-12">
+                <button type="submit" id="save" class="btn btn-primary">SAVE</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  
+        
+</script>

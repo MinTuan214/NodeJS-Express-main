@@ -1,0 +1,45 @@
+{
+  "name": "training-nodejs",
+  "version": "1.0.0",
+  "description": "CRUD",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MinTuan214/Training-NodeJS-Express.git"
+  },
+  "keywords": [
+    "crud"
+  ],
+  "author": "Minh Tuan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MinTuan214/Training-NodeJS-Express/issues"
+  },
+  "homepage": "https://github.com/MinTuan214/Training-NodeJS-Express#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-handlebars": "^8.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.6.2",
+    "mongoose-delete": "^1.0.2",
+    "mongoose-slug-generator": "^1.0.4",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.6"
+  },
+  "devDependencies": {
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "sass": "^1.78.0"
+  }
+}

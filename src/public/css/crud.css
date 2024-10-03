@@ -1,0 +1,461 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    /* background: linear-gradient(-135deg, #c850c0, #4158d0) no-repeat; */
+    background: url(../image/japan-background-digital-art.jpg) no-repeat fixed center center;
+    background-size: cover;     
+    height: 100vh; 
+    font-family: "Poppins", sans-serif;
+    
+}
+#main-crud{
+    width: 1480px;
+    height: 100%;
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+}
+#main-crud .container{
+    background-color: rgba(242, 247, 250, 0.7);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px;
+    width: 100%;
+    height: 800px;
+    border-radius: 15px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+#main-crud .container .box-top{
+    flex: 1;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px 20px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+#main-crud .container .box-top .title{
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#main-crud .container .box-top .title h2{
+    font-size: 28px;
+    font-weight: 600;
+    background: -webkit-linear-gradient(135deg, #4158d0, #c850c0) no-repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#main-crud .container .box-top .title a{
+    background: linear-gradient(-135deg, #c850c0, #4158d0) no-repeat;
+    color: #fff;
+    padding: 10px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+#main-crud .container .box-top .title .fa-right-from-bracket{
+    margin-left: 10px;
+}
+
+#main-crud .container .box-top .all-action{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#main-crud .container .box-top .all-action .filter-user{
+    display: flex;
+}
+
+
+#main-crud .container .box-top .all-action .filter{
+    margin-right: 20px;
+}
+
+#main-crud .container .box-top .all-action .search{
+    position: relative;
+}
+#main-crud .container .box-top .all-action .search input{
+    padding: 10px 50px;
+    outline: none;
+    border: none;
+    border: 1px solid rgb(206, 205, 205);
+    border-radius: 5px;
+    background-color: #fff;
+    width: 600px;
+}
+#main-crud .container .box-top .all-action .search .fa-magnifying-glass{
+    background: linear-gradient(-135deg, #c850c0, #4158d0) no-repeat;
+    padding: 10px 10px;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    border-radius: 5px 0 0 5px;
+    cursor: pointer;
+}
+
+#main-crud .container .box-top .all-action .add{
+    background: linear-gradient(-135deg, #c850c0, #4158d0) no-repeat;
+    padding: 8px 10px;
+    color: #fff;
+    right: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+#main-crud .container .box-top .all-action .trash{
+    background: rgb(243, 42, 42);
+    padding: 8px 10px;
+    color: #fff;
+    right: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#main-crud .container .box-top .all-action .filter select{
+    padding: 10px 10px;
+    outline: none;
+    border: none;
+    border: 1px solid rgb(206, 205, 205);
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 15px;
+}
+#main-crud .container .box-bot{
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px 20px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    margin-top: 10px;
+    flex: 6;
+    overflow-y: scroll;
+}
+
+#main-crud .container .box-bot .title h2{
+    font-size: 28px;
+    font-weight: 600;
+    background: -webkit-linear-gradient(135deg, #4158d0, #c850c0) no-repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+hr.new1 {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+  }
+
+table{
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid rgb(206, 205, 205);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+table th{
+    text-transform: uppercase;
+    font-weight: 600;
+    background-color: #f9fafb;
+    border-bottom: none;
+}
+
+table td, th{
+    padding: 8px 10px;
+    border-left: none;
+    border-right: none;
+    text-align: start;
+}
+table .action{
+    text-align: center;
+    width: 200px;
+}
+#main-crud .container .box-bot table .th-user{
+    position: relative;
+    width: 250px;
+}
+
+#main-crud .container .box-bot table .th-user .th-name{
+    position: absolute;
+    top: 17px;
+}
+#main-crud .container .box-bot table .th-user img{
+    width: 38px;
+    height: 38px;
+    margin-right: 10px;
+}
+
+#main-crud .container .box-bot table .action a .fa-eye{
+    background-color: #4158d0;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+#main-crud .container .box-bot table .action a .fa-pen-to-square{
+    background-color: #c850c0;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+#main-crud .container .box-bot table .action a .fa-trash-can{
+    background-color: rgb(243, 42, 42);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+/* modal */
+.modal-add{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+}
+
+.show-modal-add{
+    display: block;
+}
+
+.form-add{
+    max-width: 700px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-add .form{
+    background-color: #fff;
+    width: 100%;
+    border-radius: 15px;
+    padding: 30px;
+    position: relative;
+    animation: modal .6s ease;
+
+}
+
+@keyframes modal{
+    from{
+        transform: scale(0%);
+        opacity: 0;
+    }
+    to{
+        transform: scale(100%);
+        opacity: 1;
+    }   
+}
+.close-modal{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    color: #ccc;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.close-modal:hover{
+    color: #333;
+    background-color: #ccc;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+
+.form-add .form .title h2{
+    font-weight: 500;
+    font-size: 28px;
+    background: -webkit-linear-gradient(135deg, #4158d0, #c850c0) no-repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.form-add .form .form-add-user{
+    margin-top: 20px;
+}
+
+.form-add .form .form-add-user .box-text{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+.form-add .form .form-add-user .box-text .control-ip input{
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid rgb(206, 205, 205);
+    border-radius: 5px;
+    outline: none;
+    margin-top: 10px;
+}
+::placeholder{
+    font-size: 16px;
+    color: rgb(187, 185, 185);
+}
+.btn{
+    cursor: pointer;
+}
+
+.form-add .form .form-add-user .box-text .text-role select{
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid rgb(206, 205, 205);
+    border-radius: 5px;
+    outline: none;
+    margin-top: 10px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+}
+
+.form-add .form .form-add-user .upload-avatar{
+    margin: 30px 0;
+
+}
+
+.form-add .form .form-add-user .upload-avatar .show-image{
+    display: flex;
+    align-items: center;
+
+}
+
+.form-add .form .form-add-user .upload-avatar .show-image img{
+    width: 60px;
+    height: 60px;
+    margin-right: 30px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+input[type="file"] {
+    display: none;
+}
+  
+.custom-file-upload {
+    border: 1px solid rgb(206, 205, 205);
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-add .form .form-add-user .role{
+    margin-top: 30px;
+}
+
+.form-add .form .form-add-user .role .checkbox label{
+    font-size: 15px;
+    font-weight: 300;
+    margin-right: 20px;
+}
+
+.form-add .form .form-add-user .btn-add-user {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    gap: 30px;
+}
+
+.form-add .form .form-add-user .btn-add-user .btn{
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+.form-add .form .form-add-user .btn-add-user .btn.add{
+    background: linear-gradient(-135deg, #c850c0, #4158d0) no-repeat;
+    color: #fff;
+}
+.form-add .form .form-add-user .btn-add-user .btn.reset{
+    background: #ccc;
+    color: #333;
+}
+
+/* modal-confirm */
+.modal-delete{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+}
+
+.show-confirm{
+    display: block;
+}
+
+.form-confirm{
+    max-width: 450px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-confirm .form{
+    background-color: #fff;
+    width: 100%;
+    border-radius: 15px;
+    padding: 30px;
+    position: relative;
+    animation: modal .4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-confirm .form .title-confirm i{
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    color: #ccc;
+}
+.form-confirm .form .title-confirm p{
+    padding: 30px 0;
+}
+
+.form-confirm .form .btn-confirm .btn{
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.form-confirm .form .btn-confirm .btn.yes{
+    background-color: #dc2626;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+.form-confirm .form .btn-confirm .btn.yes:hover{
+    background-color: rgb(114, 12, 12);
+}
+
+.form-confirm .form .btn-confirm .btn.no{
+   border: 1px solid #ccc;
+   color: grey;
+   transition: all 0.3s ease-in-out;
+}
+.form-confirm .form .btn-confirm .btn.no:hover{
+    background-color: #ccc;
+    color: #333;
+}
+.btn-delete{
+    cursor: pointer;
+}
