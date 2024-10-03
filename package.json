@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MinTuan214/Training-NodeJS-Express.git"
+    "url": "git+https://github.com/MinTuan214/NodeJS-Express-Chat-Crud.git"
   },
   "keywords": [
     "crud"
@@ -17,9 +17,9 @@
   "author": "Minh Tuan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MinTuan214/Training-NodeJS-Express/issues"
+    "url": "https://github.com/MinTuan214/NodeJS-Express-Chat-Crud/issues"
   },
-  "homepage": "https://github.com/MinTuan214/Training-NodeJS-Express#readme",
+  "homepage": "https://github.com/MinTuan214/NodeJS-Express-Chat-Crud#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
