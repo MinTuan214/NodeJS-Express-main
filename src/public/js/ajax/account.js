@@ -11,7 +11,7 @@ async function register() {
         const password = document.getElementById('password').value;
 
         try {
-            await ajaxRequest('/auth/store', 'POST', { name, email, phone, password });
+            await ajaxRequest('/account/store', 'POST', { name, email, phone, password });
             resetform();
             alert("Register successfully!")
         } catch (error) {
@@ -27,10 +27,10 @@ async function login() {
         const name = document.getElementById('name').value;
         const password = document.getElementById('password').value;
         try {
-            const response = await ajaxRequest('/auth/login', 'POST', { name, password });
+            const response = await ajaxRequest('/account/login', 'POST', { name, password });
             if (response) {
                 setCookie('token', response.token, 1);
-                window.location.href = '/crud'
+                window.location.href = '/user';
             }
         } catch (error) {
             alert("Login error");

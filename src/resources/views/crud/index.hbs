@@ -2,7 +2,7 @@
     <div class="container">
         <div class="box-top">
             <div class="title">
-                <h2>Table User</h2>
+                <h2>List departments: <span id="list-of"></span></h2>
                 <a href="/chatbox"><i class="fa-solid fa-comment"></i> Chat<i class="fa-solid fa-right-from-bracket"></i></a>
             </div>
             <hr class="new1">
@@ -12,7 +12,7 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
                 <div class="filter-user">
-                    <div class="add"><i class="fa-solid fa-user-plus"></i> Add user</div>
+                    <div class="add"><i class="fa-solid fa-building-user"></i> Department</div>
                     <div class="filter">
                         <select name="users" id="">
                             <option value="1">Filter options</option>
@@ -30,16 +30,13 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>User</th>
-                        <th>User Role</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>Contries</th>
+                        <th>Department</th>
+                        <th>Administrator</th>
+                        <th>creation date</th>
                         <th></th>
                     </tr>
                 </thead>
-                <tbody id="listCrud"></tbody>
+                <tbody id="listDepartment"></tbody>
             </table>
         </div>
     </div>
@@ -72,68 +69,34 @@
                 <i class="fa-solid fa-xmark"></i>
             </div>
             <div class="title">
-                <h2>Add user</h2>
+                <h2>Create Department</h2>
             </div>
             <hr class="new1">
             <div class="form-add-user">
                 <form action="#" id="formAddUser">
                     <div class="box-text">
                         <div class="control-ip text-name">
-                            <label for="#">Name</label>
-                            <input type="text" name="name" id="name" placeholder="User name">
+                            <label for="#">Department name</label>
+                            <input type="text" name="department-name" id="department-name" placeholder="Department name">
                         </div>
-                        <div class="control-ip text-email">
-                            <label for="#">Email</label>
-                            <input type="text" name="email" id="email" placeholder="Email">
-                        </div>
-                        <div class="control-ip text-password">
-                            <label for="#">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Password">
-                        </div>
-                        <div class="control-ip text-Confirm password">
-                            <label for="#">Confirm password</label>
-                            <input type="password" name="confirm-password" placeholder="Confirm password">
+                        <div class="select-users">
+                            <label for="#">Select users</label>
+                            <select name="select-users" id="select-users">
+                            </select>
                         </div>
                     </div>
                     <div class="upload-avatar">
                         <div class="show-image">
                             <img src="image/notfound.png" alt="">
                             <label for="file-upload" class="custom-file-upload">
-                                Upload Image
+                                Background Image
                             </label>
                             <input id="file-upload" name="avatar" type="file">
                         </div>
                     </div>
-                      <div class="box-text">
-                        <div class="control-ip text-name">
-                            <label for="#">Phone</label>
-                            <input type="text" name="phone" id="phone" placeholder="Phone">
-                        </div>
-                        <div class="control-ip text-email">
-                            <label for="#">Address</label>
-                            <input type="text" name="address" id="address" placeholder="Address">
-                        </div>
-                        <div class="control-ip text-password">
-                            <label for="#">City</label>
-                            <input type="text" name="city" id="city" placeholder="City">
-                        </div>
-                        <div class="control-ip text-Confirm password">
-                            <label for="#">Contries</label>
-                            <input type="text" name="contries" id="contries" placeholder="Contries">
-                        </div>
-                    </div>
-                    <div class="role">
-                        <label for="#">Assign Role:</label>
-                        <div class="checkbox">
-                            <input id="admin" type="checkbox">
-                            <label for="admin">Administrator</label>
-                            <input id="viewer" type="checkbox">
-                            <label for="viewer">Viewer</label>
-                        </div>
-                    </div>
 
                     <div class="btn-add-user">
-                        <a class="btn add btn-submit">+ Add new user</a>
+                        <a class="btn add btn-submit">+ Add new department</a>
                         <a href="#" class="btn reset">Reset</a>
                     </div>
                 </form>
@@ -141,5 +104,5 @@
         </div>
     </div>
 </div>
-<script type="module" src="js/ajax/crud.js"></script>
+<script type="module" src="js/ajax/user.js"></script>
 

@@ -1,4 +1,4 @@
-const User = require('../models/Auth');
+const User = require('../models/Account');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
@@ -16,7 +16,7 @@ async function registerUser(userData) {
 
         const createUser = await new User({
             name: userData.name,
-            emai: userData.email,
+            email: userData.email,
             phone: userData.phone,
             password: hashed
         })
@@ -31,11 +31,11 @@ async function login(name, password) {
     try {
         const user = await User.findOne({ name });
         if (!user) {
-            return res.status(404).json({ message: "Wrong username!" });
+            return { success: false, message: "Wrong username!" };
         }
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) {
-            return res.status(404).json({ message: "Wrong password!" });
+            return { success: false, message: "Wrong password!" };;
         }
         if (user) {
             const token = jwt.sign(

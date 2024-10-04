@@ -9,7 +9,6 @@ function modal() {
 
     if (btnAdd) {
         btnAdd.addEventListener('click', () => {
-            console.log(123)
             modalAdd?.classList.add('show-modal-add');
             modalAdd?.classList.remove('modal-hide');
         });

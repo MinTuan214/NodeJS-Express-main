@@ -1,10 +1,10 @@
-const User = require('../services/CrudService');
+const User = require('../services/UserService');
 
-class CrudController{
+class UserController{
     async index(req, res){
         return res.render('crud/index')
     }
-  
+
     async getUser(req, res) {
         try {
             const user = await User.getUser()        
@@ -33,4 +33,4 @@ class CrudController{
     }
 }
 
-module.exports = new CrudController;
+module.exports = new UserController;

@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const User_department = new Schema({
     user_id: { 
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Account'
     },
     department_id: { 
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'departments'
     }
 },{

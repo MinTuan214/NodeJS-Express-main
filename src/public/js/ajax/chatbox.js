@@ -5,7 +5,7 @@ var currentUserId = null;
 
 async function displayUserName() {
     try {
-        const response = await ajaxRequest('/user-info', 'GET');
+        const response = await ajaxRequest('user-infor/user-info', 'GET');
         const userNameElement = document.getElementById('user-name');
         if (userNameElement && response.name) {
             userNameElement.textContent = response.name;
@@ -33,7 +33,7 @@ function formatTimestampToVNTime(timestamp) {
 
 async function logout() {
     try {
-        const response = await ajaxRequest('/auth/logout', 'POST');
+        const response = await ajaxRequest('/account/logout', 'POST');
         if (response.message === 'Logged out successfully') {
             window.location.href = '/';
         }
@@ -44,7 +44,7 @@ async function logout() {
 
 async function getUserChat() {
     try {
-        const users = await ajaxRequest('/chatbox/list-user', 'GET');
+        const users = await ajaxRequest('/userdepartment', 'GET');
         const listUser = document.querySelector('.box-list-user');
         listUser.innerHTML = '';
         users.forEach(user => {
@@ -52,10 +52,10 @@ async function getUserChat() {
                 <div class="content-message ">
                         <div class="left">
                             <div class="avatar">
-                                <img src="${user.avatar}" alt="">
+                                <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png" alt="">
                             </div>
                             <div class="name-message">
-                                <span class="name">${user.name}</span>
+                                <span class="name">${user.department_id.department_name}</span>
                                 <p class="status">Online
                                     <span class="dot"></span>
                                 </p>
@@ -75,11 +75,20 @@ async function getUserChat() {
     }
 }
 
+async function getID() {
+    try {
+        const response = await ajaxRequest('user-infor/user-id', 'GET');
+        currentUserId = response.id;
+    } catch (error) {
+        console.log('Error fetching user ID:', error);
+    }
+} 
+
+
 async function getMessage() {
     try {
         const message = await ajaxRequest('/chatbox/message', 'GET');
         const chatMessage = document.querySelector('.chat-messages');
-        const selectUser = document.querySelector('.user-texting'); 
         chatMessage.innerHTML = '';
         message.reverse().forEach(mess => {
             const timestamp = mess.createdAt;
@@ -91,13 +100,13 @@ async function getMessage() {
                             <span class="time">${formattedTime}</span>
                             <p>${mess.content}</p>
                         </div>
-                        <img src="${mess.user_id.avatar}" alt="John Matthews">
+                        <img src="${mess.user_id.avatar}" alt="MinhTuan">
                     </div>
                 `;
             }else{
                 chatMessage.innerHTML += `
                     <div class="message received">
-                        <img src="${mess.user_id.avatar}" alt="Nicolas Klaus">
+                        <img src="${mess.user_id.avatar}" alt="MinhTuan">
                         <div class="message-content">
                                 <p>${mess.content}</p>
                                 <span class="time">${formattedTime}</span>
@@ -105,21 +114,14 @@ async function getMessage() {
                     </div>                
                 `;
             }
+            chatMessage.scrollTop = chatMessage.scrollHeight; 
         });
-        chatMessage.scrollTop = chatMessage.scrollHeight; 
     } catch (error) {
         console.log(error); 
     }
 }
 
-async function getID() {
-    try {
-        const response = await ajaxRequest('/user-id', 'GET');
-        currentUserId = response.id;
-    } catch (error) {
-        console.log('Error fetching user ID:', error);
-    }
-}
+
 
 async function sendMessage() {
         const btnSend = document.querySelector('.btn-send');

@@ -272,7 +272,7 @@ table .action{
 .close-modal:hover{
     color: #333;
     background-color: #ccc;
-    padding: 3px 10px;
+    /* padding: 3px 10px; */
     border-radius: 5px;
 }
 
@@ -300,6 +300,17 @@ table .action{
     outline: none;
     margin-top: 10px;
 }
+.form-add .form .form-add-user .box-text .select-users select{
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid rgb(206, 205, 205);
+    border-radius: 5px;
+    outline: none;
+    margin-top: 10px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+}
 ::placeholder{
     font-size: 16px;
     color: rgb(187, 185, 185);
@@ -325,10 +336,16 @@ table .action{
 
 }
 
+.not-user{
+    text-align: center;
+    font-size: 16px;
+    padding: 20px 0;
+    font-weight: 600;
+}
+
 .form-add .form .form-add-user .upload-avatar .show-image{
     display: flex;
     align-items: center;
-
 }
 
 .form-add .form .form-add-user .upload-avatar .show-image img{

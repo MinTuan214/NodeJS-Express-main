@@ -1,18 +1,8 @@
 const { json } = require('express');
-const userService = require('../services/AuthService');
+const userService = require('../services/AccountService');
 
 function index(req, res) {
     return res.render('auth/index');
-}
-
-async function getUser(req, res) {
-    try {
-        const user = await userService.getUser()
-        return res.json(user);
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: 'Internal Server Error' });
-    }
 }
 
 async function register(req, res) {
@@ -60,4 +50,4 @@ async function logout(req, res) {
     return res.json({ message: 'Logged out successfully' });
 }
 
-module.exports = { index, register, store, login, getUser, logout};
+module.exports = { register, store, login, logout, index};

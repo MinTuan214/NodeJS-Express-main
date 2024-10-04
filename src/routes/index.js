@@ -1,13 +1,20 @@
-const loginRoute = require('./auth');
 const chatRoute = require('./chatbox');
-const crudRoute = require('./crud');
-const authRoute = require('./auth');
+const userRoute = require('./user');
+const accountRoute = require('./account');
+const userInforRoute = require('./user_infor');
+const departmentRoute = require('./department');
+const UserDepartmentRoute = require('./user_department');
+const middlewareAuth = require('../app/middleware/AuthMiddleware');
+
 
 function route(app){
-    app.use('/crud', crudRoute);
-    app.use('/auth', authRoute);
+    app.use('/user',middlewareAuth.authenticateToken, userRoute);
+    app.use('/account', accountRoute);
     app.use('/chatbox', chatRoute);
-    app.use('/', loginRoute);
+    app.use('/user-infor', userInforRoute);
+    app.use('/department', departmentRoute);
+    app.use('/userdepartment', UserDepartmentRoute);
+    app.use('/', accountRoute);
 }
 
 module.exports = route;
