@@ -30,7 +30,7 @@ function formatTimestampToVNTime(timestamp) {
 
 async function getDepartments() {
     try {
-        const departments = await ajaxRequest('/department', 'GET');
+        const departments = await ajaxRequest('/department/get-department', 'GET');
         const departmentList = document.getElementById('listDepartment');
         departmentList.innerHTML = '';
         if (departments.length == 0) {
@@ -45,7 +45,7 @@ async function getDepartments() {
             const formattedTime = formatTimestampToVNTime(timestamp);
             departmentList.innerHTML += `
                     <tr>
-                        <td>3</td>
+                        <td><input type="checkbox" /></td>
                         <td>${department.department_name}</td>
                         <td>${department.user_id.name}</td>
                         <td>${formattedTime}</td>

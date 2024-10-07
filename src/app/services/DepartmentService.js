@@ -2,9 +2,13 @@ const Department = require('../models/Department');
 const User_department = require('../models/User_department');
 
 async function getDepartment() {
-    const departments = await Department.find({})
-    .populate('user_id', 'name phone');
-    return departments;
+    try {
+        const departments = await Department.find({})
+        .populate('user_id', 'name phone');
+        return departments;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 async function createDepartment(data) {

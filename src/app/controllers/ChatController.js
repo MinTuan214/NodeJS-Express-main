@@ -5,8 +5,12 @@ function index(req, res){
 }
 
 async function getMessage(req, res) {
-    const mess = await message.getMessage()
-    return res.json(mess);
+    try {
+        const mess = await message.getMessage()
+        return res.json(mess);
+    } catch (error) {   
+        console.log(error);
+    }
 }
 
 async function sendMessage(req, res) {

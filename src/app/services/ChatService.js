@@ -1,13 +1,21 @@
 const Chat = require('../models/Message');
 
 async function getMessage() {
-    const message = await Chat.find({})
-    .populate('user_id', 'name avatar');
-    return message;
+    try {
+        const message = await Chat.find({})
+        .populate('user_id', 'name avatar');
+        return message;
+    } catch (error) {   
+        console.log(error);
+    }
 }
 async function sendMessage(data) {
-    const newMessage = new Chat(data);
-    return newMessage.save(); 
+    try {
+        const newMessage = new Chat(data);
+        return newMessage.save(); 
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 module.exports = { getMessage, sendMessage }

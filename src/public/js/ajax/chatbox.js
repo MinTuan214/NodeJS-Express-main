@@ -44,36 +44,62 @@ async function logout() {
 
 async function getUserChat() {
     try {
-        const users = await ajaxRequest('/userdepartment', 'GET');
+        const userDepartments = await ajaxRequest('/userdepartment', 'GET');
         const listUser = document.querySelector('.box-list-user');
         listUser.innerHTML = '';
-        users.forEach(user => {
+
+        userDepartments.joinedDepartments.forEach(department => {
             listUser.innerHTML += `
-                <div class="content-message ">
-                        <div class="left">
-                            <div class="avatar">
-                                <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png" alt="">
-                            </div>
-                            <div class="name-message">
-                                <span class="name">${user.department_id.department_name}</span>
-                                <p class="status">Online
-                                    <span class="dot"></span>
-                                </p>
-                            </div>
+                <div class="content-message">
+                    <div class="left">
+                        <div class="avatar">
+                            <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png" alt="">
                         </div>
-                        <div class="right">
-                            <div class="time">
-                                <p>12:35</p>
-                            </div>
+                        <div class="name-message">
+                            <span class="name">${department.department_id.department_name}</span>
+                            <p class="status">Online
+                                <span class="dot"></span>
+                            </p>
                         </div>
                     </div>
+                    <div class="right">
+                        <div class="time">
+                            <p>12:35</p>
+                        </div>
+                    </div>
+                </div>
             `;
-        })
+        });
+
+        userDepartments.createdDepartments.forEach(department => {
+            listUser.innerHTML += `
+                <div class="content-message">
+                    <div class="left">
+                        <div class="avatar">
+                            <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png" alt="">
+                        </div>
+                        <div class="name-message">
+                            <span class="name">${department.department_name}</span>
+                            <p class="status">Online
+                                <span class="dot"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="time">
+                            <p>12:35</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
         chooseUser();
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
+
 
 async function getID() {
     try {

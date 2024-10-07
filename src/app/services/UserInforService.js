@@ -2,8 +2,12 @@ const User = require('../models/Account');
 require('dotenv').config();
 
 async function getUser() {
-    const users = await User.find({});
-    return users;
+    try {
+        const users = await User.find({});
+        return users;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 module.exports = { getUser }

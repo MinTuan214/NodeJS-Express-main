@@ -1,13 +1,26 @@
 const DepartmentService = require('../services/DepartmentService');
 
+
+async function index(req, res){
+    return res.render('department/index')
+}
+
 async function getDepartment(req, res) {
-    const departments = await DepartmentService.getDepartment()
-    return res.json(departments);
+    try {
+        const departments = await DepartmentService.getDepartment()
+        return res.json(departments);
+    } catch (error) {   
+        console.log(error);
+    }
 }
 
 async function createDepartment(req, res) {
-    const department = await DepartmentService.createDepartment(req.body);
-    return res.json(department);
+    try {
+        const department = await DepartmentService.createDepartment(req.body);
+        return res.json(department);
+    } catch (error) {
+        console.log(error);   
+    }
 }
 
-module.exports = { getDepartment, createDepartment }
+module.exports = { getDepartment, createDepartment, index }
