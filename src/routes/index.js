@@ -8,7 +8,7 @@ const middlewareAuth = require('../app/middleware/AuthMiddleware');
 
 function route(app){
     app.use('/account', accountRoute);
-    app.use('/chatbox', chatRoute);
+    app.use('/chatbox', middlewareAuth.authenticateToken, chatRoute);
     app.use('/user-infor', userInforRoute);
     app.use('/userdepartment', UserDepartmentRoute);
     app.use('/department', middlewareAuth.authenticateToken, departmentRoute);

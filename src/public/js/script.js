@@ -54,17 +54,22 @@ function modal() {
 
 export function chooseUser() {
     const contentMessage = document.querySelectorAll('.content-message');
-
+    const detaileMess = document.querySelector('.box-chat-user');
+    const boxDefault = document.querySelector('.box-defautl');
     if (contentMessage) {
         contentMessage.forEach(function (item) {
             item.addEventListener('click', function () {
                 contentMessage.forEach(function (msg) {
                     msg.classList.remove('active');
+                    detaileMess.classList.add('detail-mess');
+                    boxDefault.classList.add('hidden-mess')
                 });
                 item.classList.add('active');
             });
         });
     }
+
+
 }
 
 function showPassword() {

@@ -1,4 +1,5 @@
 const message = require('../services/ChatService');
+const jwt = require('jsonwebtoken');
 
 function index(req, res){
     return res.render('chatbox/index')
@@ -6,10 +7,15 @@ function index(req, res){
 
 async function getMessage(req, res) {
     try {
-        const mess = await message.getMessage()
-        return res.json(mess);
-    } catch (error) {   
-        console.log(error);
+        const departmentId = req.params.department;
+        const userId = req.cookies.token; 
+        
+        const token = jwt.verify(userId, process.env.JWT_SECRET);
+        const userMessages = await message.getMessage(departmentId, token._id);
+        
+        return res.json(userMessages);
+    } catch (error) {
+        console.log('Error in controller:', error);
     }
 }
 

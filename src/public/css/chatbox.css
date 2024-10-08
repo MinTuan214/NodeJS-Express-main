@@ -7,13 +7,17 @@
 }
 
 body{
-    /* background: linear-gradient(-135deg, #c850c0, #4158d0) no-repeat; */
     background: url(../image/japan-background-digital-art.jpg) no-repeat fixed center center;
     background-size: cover;     
     height: 100vh; 
     font-family: "Poppins", sans-serif;
-    
 }
+
+a{
+    text-decoration: none;
+    color: #333;
+}
+
 #main-chat{
     width: 1480px;
     height: 100%;
@@ -165,11 +169,11 @@ body{
 }
 
 #main-chat .container .box-right .content .box-list-user{
-    flex: 0.8;
+    /* flex: 0.8; */
+    width: 370px;
     background-color: #a6b3f5;
     height: 100%;
     overflow-y: scroll;
-    /* padding-top: 14px; */
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
@@ -241,9 +245,46 @@ body{
     padding: 30px 50px;
     flex: 2;
     position: relative;
-    display: flex;
+    display: none;
     flex-direction: column;
 }
+
+#main-chat .container .box-right .content .box-defautl{
+    display: flex;
+    flex: 2;
+    padding: 20px 30px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #fff; */
+}
+
+#main-chat .container .box-right .content .box-defautl h2{
+    padding: 10px 0;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+#main-chat .container .box-right .content .box-defautl p{
+    width: 400px;
+    text-align: center;
+    font-size: 14px;
+}
+
+#main-chat .container .box-right .content .box-defautl img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.detail-mess{
+    display: block !important;
+}
+
+.hidden-mess{
+    display: none !important;
+}
+
 .hr-top{
     border:1px solid rgb(196, 196, 196);
     margin-top: 20px;

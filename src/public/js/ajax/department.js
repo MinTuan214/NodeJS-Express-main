@@ -118,10 +118,12 @@ async function resetForm() {
     document.getElementById('department-name').value = "";
 }
 
-window.onload = function () {
+function main(){
     getID();
     displayUserName();
     getDepartments();
     selectUsers();
     createDepartment();
 }
+
+main();

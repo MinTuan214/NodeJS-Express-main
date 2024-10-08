@@ -1,9 +1,7 @@
 const path = require('path');
 const express = require('express');
 const { engine } = require('express-handlebars');
-const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
 
 const app = express();
 const port1 = 3005;
@@ -14,9 +12,7 @@ const route = require('./routes');
 
 db.connect();
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
 app.use(cookieParser());
-app.use(methodOverride('_method'));
 app.engine('.hbs', engine({
   extname: '.hbs',
   helpers: { sum: (a, b) => a + b }

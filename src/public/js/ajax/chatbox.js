@@ -2,6 +2,8 @@ import { ajaxRequest, setCookie, getCookie } from './apiHelper.js';
 import { chooseUser } from '../script.js';
 
 var currentUserId = null;
+var currentDepartmentId = null;
+
 
 async function displayUserName() {
     try {
@@ -42,6 +44,24 @@ async function logout() {
     }
 }
 
+async function chooseDepartment(department) {
+    if (department._id) {
+        currentDepartmentId = department._id;  
+    } else if (department.department_id && department.department_id._id) {
+        currentDepartmentId = department.department_id._id; 
+    }
+
+    getMessage();  
+
+    const departmentNameElement = document.querySelector('.name-status .name');
+    
+    if (departmentNameElement) {
+        const departmentName = department.department_name || department.department_id.department_name;
+        departmentNameElement.textContent = departmentName;
+    }
+}
+
+
 async function getUserChat() {
     try {
         const userDepartments = await ajaxRequest('/userdepartment', 'GET');
@@ -49,49 +69,59 @@ async function getUserChat() {
         listUser.innerHTML = '';
 
         userDepartments.joinedDepartments.forEach(department => {
-            listUser.innerHTML += `
-                <div class="content-message">
-                    <div class="left">
-                        <div class="avatar">
-                            <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png" alt="">
-                        </div>
-                        <div class="name-message">
-                            <span class="name">${department.department_id.department_name}</span>
-                            <p class="status">Online
-                                <span class="dot"></span>
-                            </p>
-                        </div>
+            const departmentDiv = document.createElement('div');
+            departmentDiv.classList.add('content-message');
+            departmentDiv.innerHTML = `
+                <div class="left">
+                    <div class="avatar">
+                        <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png" alt="">
                     </div>
-                    <div class="right">
-                        <div class="time">
-                            <p>12:35</p>
-                        </div>
+                    <div class="name-message">
+                        <span class="name">${department.department_id.department_name}</span>
+                        <p class="status">Online
+                            <span class="dot"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="time">
+                        <p>12:35</p>
                     </div>
                 </div>
             `;
+            departmentDiv.addEventListener('click', () => {            
+                chooseDepartment(department); 
+            });
+
+            listUser.appendChild(departmentDiv);
         });
 
         userDepartments.createdDepartments.forEach(department => {
-            listUser.innerHTML += `
-                <div class="content-message">
-                    <div class="left">
-                        <div class="avatar">
-                            <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png" alt="">
-                        </div>
-                        <div class="name-message">
-                            <span class="name">${department.department_name}</span>
-                            <p class="status">Online
-                                <span class="dot"></span>
-                            </p>
-                        </div>
+            const departmentDiv = document.createElement('div');
+            departmentDiv.classList.add('content-message');
+            departmentDiv.innerHTML = `
+                <div class="left">
+                    <div class="avatar">
+                        <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png" alt="">
                     </div>
-                    <div class="right">
-                        <div class="time">
-                            <p>12:35</p>
-                        </div>
+                    <div class="name-message">
+                        <span class="name">${department.department_name}</span>
+                        <p class="status">Online
+                            <span class="dot"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="time">
+                        <p>12:35</p>
                     </div>
                 </div>
             `;
+            departmentDiv.addEventListener('click', () => {
+                chooseDepartment(department); 
+            });
+
+            listUser.appendChild(departmentDiv);
         });
 
         chooseUser();
@@ -113,13 +143,17 @@ async function getID() {
 
 async function getMessage() {
     try {
-        const message = await ajaxRequest('/chatbox/message', 'GET');
+        if (!currentDepartmentId) return;
+
+        const message = await ajaxRequest(`/chatbox/message/${currentDepartmentId}`, 'GET');
+        console.log("Fetched messages:", message);
+        
         const chatMessage = document.querySelector('.chat-messages');
         chatMessage.innerHTML = '';
         message.reverse().forEach(mess => {
             const timestamp = mess.createdAt;
             const formattedTime = formatTimestampToVNTime(timestamp);
-            if(mess.user_id._id === currentUserId){
+            if(mess.user_id._id === currentUserId){                
                 chatMessage.innerHTML += `
                     <div class="message sent">
                         <div class="message-content">
@@ -140,6 +174,7 @@ async function getMessage() {
                     </div>                
                 `;
             }
+            
             chatMessage.scrollTop = chatMessage.scrollHeight; 
         });
     } catch (error) {
@@ -147,15 +182,20 @@ async function getMessage() {
     }
 }
 
-
-
 async function sendMessage() {
         const btnSend = document.querySelector('.btn-send');
         btnSend?.addEventListener('click', async () => {
 
             const contentMess = document.getElementById('send-message').value;
+            if (!contentMess) return;
+
             try {
-                await ajaxRequest('/chatbox/send-message', 'POST', { content: contentMess, user_id: currentUserId  });
+                await ajaxRequest('/chatbox/send-message', 'POST', 
+                    {   
+                        content: contentMess, 
+                        user_id: currentUserId, 
+                        department_id: currentDepartmentId  
+                    });
                 getMessage();
                 document.getElementById('send-message').value = '';
             } catch (error) {
@@ -166,7 +206,7 @@ async function sendMessage() {
 
 }
 
-window.onload = function () {
+function main(){
     document.querySelector(".fa-power-off").addEventListener('click', logout);
     getID();
     displayUserName();
@@ -174,6 +214,7 @@ window.onload = function () {
     sendMessage();
     getMessage();
 }
+main()
 
 setInterval(() =>{
     getMessage()

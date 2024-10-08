@@ -1,4 +1,4 @@
-import { ajaxRequest, setCookie, getCookie } from './apiHelper.js';
+import { ajaxRequest, setCookie } from './apiHelper.js';
 
 async function register() {
     const btnRegister = document.querySelector('.btn-register');
@@ -45,7 +45,9 @@ function resetform() {
     document.getElementById('password').value = "";
 }
 
-window.onload = function () {
+function main(){
     login();
     register();
 }
+
+main()

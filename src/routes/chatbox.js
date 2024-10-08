@@ -7,7 +7,7 @@ const middlewareAuth = require('../app/middleware/AuthMiddleware');
 
 router.get('/list-user', userInfor.getUser);
 
-router.get('/message', chatbox.getMessage);
+router.get('/message/:department', chatbox.getMessage);
 router.post('/send-message', chatbox.sendMessage);
 
 router.get('/', middlewareAuth.authenticateToken, chatbox.index);
