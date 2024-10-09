@@ -65,7 +65,7 @@ async function getDepartments() {
             });
         });
     } catch (error) {
-        alert('Error: khong render ra duoc o user');
+        alert('Error: Cannot be displayed');
     }
 }
 
@@ -80,6 +80,7 @@ async function selectUsers() {
             `;
         })
     } catch (error) {
+        console.log(error);
         
     }
 }

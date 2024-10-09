@@ -10,6 +10,9 @@ async function getDepartment(req, res) {
         const departments = await DepartmentService.getDepartment()
         return res.json(departments);
     } catch (error) {   
+        if(res.status === 401){
+            return render('auth/index')
+        }
         console.log(error);
     }
 }
@@ -19,6 +22,9 @@ async function createDepartment(req, res) {
         const department = await DepartmentService.createDepartment(req.body);
         return res.json(department);
     } catch (error) {
+        if(res.status === 401){
+            return render('auth/index')
+        }
         console.log(error);   
     }
 }

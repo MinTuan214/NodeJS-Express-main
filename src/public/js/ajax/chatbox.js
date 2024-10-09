@@ -4,7 +4,6 @@ import { chooseUser } from '../script.js';
 var currentUserId = null;
 var currentDepartmentId = null;
 
-
 async function displayUserName() {
     try {
         const response = await ajaxRequest('user-infor/user-info', 'GET');
@@ -30,8 +29,6 @@ function formatTimestampToVNTime(timestamp) {
     
     return formattedTime;
 }
-
-
 
 async function logout() {
     try {
@@ -60,7 +57,6 @@ async function chooseDepartment(department) {
         departmentNameElement.textContent = departmentName;
     }
 }
-
 
 async function getUserChat() {
     try {
@@ -130,7 +126,6 @@ async function getUserChat() {
     }
 }
 
-
 async function getID() {
     try {
         const response = await ajaxRequest('user-infor/user-id', 'GET');
@@ -139,7 +134,6 @@ async function getID() {
         console.log('Error fetching user ID:', error);
     }
 } 
-
 
 async function getMessage() {
     try {
@@ -185,10 +179,8 @@ async function getMessage() {
 async function sendMessage() {
         const btnSend = document.querySelector('.btn-send');
         btnSend?.addEventListener('click', async () => {
-
             const contentMess = document.getElementById('send-message').value;
             if (!contentMess) return;
-
             try {
                 await ajaxRequest('/chatbox/send-message', 'POST', 
                     {   
@@ -202,8 +194,6 @@ async function sendMessage() {
                 console.log('Error: ' + error.message);
             }
         })
-
-
 }
 
 function main(){

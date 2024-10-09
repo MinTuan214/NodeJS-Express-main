@@ -10,8 +10,9 @@ async function getMessage(req, res) {
         const departmentId = req.params.department;
         const userId = req.cookies.token; 
         
-        const token = jwt.verify(userId, process.env.JWT_SECRET);
-        const userMessages = await message.getMessage(departmentId, token._id);
+        jwt.verify(userId, process.env.JWT_SECRET);
+
+        const userMessages = await message.getMessage(departmentId);
         
         return res.json(userMessages);
     } catch (error) {
