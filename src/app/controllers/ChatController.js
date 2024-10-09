@@ -25,7 +25,8 @@ async function sendMessage(req, res) {
         const sendMessage = await message.sendMessage(req.body);
         return res.json(sendMessage);
     } catch (error) {
-        console.log(error);
+        console.log('Error sending message:', error);
+        return res.status(500).json({ message: "Failed to send message" });
     }
 }
 

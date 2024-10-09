@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 async function getUser(req, res) {
     try {
-        const user = await UserInforService.getUser()
+        const user = await UserInforService.getUser();
         return res.json(user);
     } catch (error) {
         console.log(error);
@@ -21,14 +21,12 @@ async function getUserInfo(req, res) {
         if (err) {
             return res.status(403).json({ message: "Invalid token" });
         }
-
         return res.json({ name: user.name });
     });
 }
 
 function getIduser(req, res) {
     const token = req.cookies.token;
-
     if (!token) {
         return res.status(401).json({ message: "Token not found" });
     }
@@ -37,7 +35,6 @@ function getIduser(req, res) {
         if (err) {
             return res.status(403).json({ message: "Invalid token" });
         }
-        
         return res.json({ id: user._id });
     });
 }

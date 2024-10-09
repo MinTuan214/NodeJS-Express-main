@@ -6,7 +6,7 @@ var currentDepartmentId = null;
 
 async function displayUserName() {
     try {
-        const response = await ajaxRequest('user-infor/user-info', 'GET');
+        const response = await ajaxRequest('auth/user-info', 'GET');
         const userNameElement = document.getElementById('user-name');
         if (userNameElement && response.name) {
             userNameElement.textContent = response.name;
@@ -32,7 +32,7 @@ function formatTimestampToVNTime(timestamp) {
 
 async function logout() {
     try {
-        const response = await ajaxRequest('/account/logout', 'POST');
+        const response = await ajaxRequest('/logout', 'POST');
         if (response.message === 'Logged out successfully') {
             window.location.href = '/';
         }
@@ -60,7 +60,7 @@ async function chooseDepartment(department) {
 
 async function getUserChat() {
     try {
-        const userDepartments = await ajaxRequest('/userdepartment', 'GET');
+        const userDepartments = await ajaxRequest('/userdepartments', 'GET');
         const listUser = document.querySelector('.box-list-user');
         listUser.innerHTML = '';
 
@@ -128,7 +128,7 @@ async function getUserChat() {
 
 async function getID() {
     try {
-        const response = await ajaxRequest('user-infor/user-id', 'GET');
+        const response = await ajaxRequest('auth/user-id', 'GET');
         currentUserId = response.id;
     } catch (error) {
         console.log('Error fetching user ID:', error);
@@ -139,7 +139,7 @@ async function getMessage() {
     try {
         if (!currentDepartmentId) return;
 
-        const message = await ajaxRequest(`/chatbox/message/${currentDepartmentId}`, 'GET');
+        const message = await ajaxRequest(`/messages/${currentDepartmentId}`, 'GET');
         console.log("Fetched messages:", message);
         
         const chatMessage = document.querySelector('.chat-messages');
@@ -182,7 +182,7 @@ async function sendMessage() {
             const contentMess = document.getElementById('send-message').value;
             if (!contentMess) return;
             try {
-                await ajaxRequest('/chatbox/send-message', 'POST', 
+                await ajaxRequest('/messages/send-message', 'POST', 
                     {   
                         content: contentMess, 
                         user_id: currentUserId, 

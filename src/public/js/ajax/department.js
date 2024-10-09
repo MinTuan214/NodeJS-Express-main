@@ -4,7 +4,7 @@ var currentUserId = null;
 
 async function displayUserName() {
     try {
-        const response = await ajaxRequest('user-infor/user-info', 'GET');
+        const response = await ajaxRequest('auth/user-info', 'GET');
         const userNameElement = document.getElementById('list-of');
         if (userNameElement && response.name) {
             userNameElement.textContent = response.name;
@@ -30,7 +30,7 @@ function formatTimestampToVNTime(timestamp) {
 
 async function getDepartments() {
     try {
-        const departments = await ajaxRequest('/department/get-department', 'GET');
+        const departments = await ajaxRequest('/departments/list', 'GET');
         const departmentList = document.getElementById('listDepartment');
         departmentList.innerHTML = '';
         if (departments.length == 0) {
@@ -71,7 +71,7 @@ async function getDepartments() {
 
 async function selectUsers() {
     try {
-        const users = await ajaxRequest('/chatbox/list-user', 'GET');
+        const users = await ajaxRequest('/messages/list-user', 'GET');
         const select = document.getElementById("select-users");
         select.innerHTML = '';
         users.forEach(user => {
@@ -87,7 +87,7 @@ async function selectUsers() {
 
 async function getID() {
     try {
-        const response = await ajaxRequest('user-infor/user-id', 'GET');
+        const response = await ajaxRequest('auth/user-id', 'GET');
         currentUserId = response.id;
     } catch (error) {
         console.log('Error fetching user ID:', error);
@@ -101,7 +101,7 @@ async function createDepartment() {
         const selectUsers = document.getElementById('select-users').value;
 
         try {
-            await ajaxRequest('/department/store', 'POST', 
+            await ajaxRequest('/departments/add', 'POST', 
                 { 
                     department_name: departmentName, 
                     user_id: currentUserId,
