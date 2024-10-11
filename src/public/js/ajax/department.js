@@ -162,7 +162,7 @@ async function addDeleteEvent() {
 
 async function selectUsers() {
     try {
-        const users = await ajaxRequest('/messages/list-user', 'GET');
+        const users = await ajaxRequest('/message/messages', 'GET');
         const select = document.getElementById("select-users");
         select.innerHTML = '';
         users.forEach(user => {
