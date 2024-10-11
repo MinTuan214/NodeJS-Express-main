@@ -136,9 +136,7 @@ async function getID() {
 
 async function getMessage() {
     try {
-        // if (!currentDepartmentId) return;
-
-        const message = await ajaxRequest(`/messages/${currentDepartmentId}`, 'GET');
+        const message = await ajaxRequest(`message/messages/${currentDepartmentId}`, 'GET');
         console.log("Fetched messages:", message);
         
         const chatMessage = document.querySelector('.chat-messages');
@@ -169,8 +167,7 @@ async function getMessage() {
                             </div>
                     </div>                
                 `;
-            }
-            
+            } 
             chatMessage.scrollTop = chatMessage.scrollHeight; 
         });
     } catch (error) {
@@ -187,7 +184,7 @@ async function sendMessage() {
         console.log('Sending message to department:', currentDepartmentId);
 
         try {
-            await ajaxRequest('/messages/send-message', 'POST', {
+            await ajaxRequest('message/messages', 'POST', {
                 content: contentMess, 
                 user_id: currentUserId, 
                 department_id: currentDepartmentId 

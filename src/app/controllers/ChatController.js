@@ -7,7 +7,7 @@ function index(req, res){
 
 async function getMessage(req, res) {
     try {
-        const departmentId = req.params.department;
+        const departmentId = req.params.id;
         const userId = req.cookies.token; 
         
         jwt.verify(userId, process.env.JWT_SECRET);

@@ -93,7 +93,7 @@ async function updateDepartment() {
                 await ajaxRequest(`/department/departments/${selectedId}`, 'PUT', 
                     { 
                         department_name: departmentName, 
-                        // selected_user_id: selectUsers
+                        selected_user_id: selectUsers
                     });
                 selectedId = null;
                 }
@@ -172,7 +172,6 @@ async function selectUsers() {
         })
     } catch (error) {
         console.log(error);
-        
     }
 }
 
