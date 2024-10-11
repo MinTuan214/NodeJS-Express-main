@@ -10,7 +10,7 @@ function route(app){
     app.use('/messages', middlewareAuth.authenticateToken, messageRoute);
     app.use('/auth', middlewareAuth.authenticateToken, authRoute);
     app.use('/userdepartments', middlewareAuth.authenticateToken, userDepartmentRoute);
-    app.use('/departments', middlewareAuth.authenticateToken, departmentRoute);
+    app.use('/department', middlewareAuth.authenticateToken, departmentRoute);
     app.use('/', accountRoute);
 }
 

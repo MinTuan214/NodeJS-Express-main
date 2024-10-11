@@ -9,8 +9,8 @@ function modal() {
 
     if (btnAdd) {
         btnAdd.addEventListener('click', () => {
-            modalAdd?.classList.add('show-modal-add');
-            modalAdd?.classList.remove('modal-hide');
+            modalAdd.classList.add('show-modal-add');
+            modalAdd.classList.remove('modal-hide');
         });
     }
 
@@ -26,6 +26,13 @@ function modal() {
             modalAdd.classList.remove('show-modal-add');
         });
     }
+
+    if (modalAdd) {
+        modalAdd.addEventListener('click', () => {
+            modalAdd.classList.remove('show-confirm');
+        });
+    }
+
     if (modalDelete) {
         modalDelete.addEventListener('click', () => {
             modalDelete.classList.remove('show-confirm');
@@ -35,6 +42,7 @@ function modal() {
         closeModal.forEach(item => {
             item.addEventListener('click', () => {
                 modalAdd.classList.remove('show-modal-add');
+                modalAdd.classList.remove('show-confirm');
                 modalDelete.classList.remove('show-confirm');
             });
         });
@@ -68,8 +76,6 @@ export function chooseUser() {
             });
         });
     }
-
-
 }
 
 function showPassword() {

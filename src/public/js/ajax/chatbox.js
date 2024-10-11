@@ -43,20 +43,19 @@ async function logout() {
 
 async function chooseDepartment(department) {
     if (department._id) {
-        currentDepartmentId = department._id;  
-    } else if (department.department_id && department.department_id._id) {
-        currentDepartmentId = department.department_id._id; 
+        currentDepartmentId = department._id;
+        console.log('Selected Department ID:', currentDepartmentId);
     }
 
-    getMessage();  
+    getMessage();
 
     const departmentNameElement = document.querySelector('.name-status .name');
-    
     if (departmentNameElement) {
         const departmentName = department.department_name || department.department_id.department_name;
         departmentNameElement.textContent = departmentName;
     }
 }
+
 
 async function getUserChat() {
     try {
@@ -137,7 +136,7 @@ async function getID() {
 
 async function getMessage() {
     try {
-        if (!currentDepartmentId) return;
+        // if (!currentDepartmentId) return;
 
         const message = await ajaxRequest(`/messages/${currentDepartmentId}`, 'GET');
         console.log("Fetched messages:", message);
@@ -147,6 +146,9 @@ async function getMessage() {
         message.reverse().forEach(mess => {
             const timestamp = mess.createdAt;
             const formattedTime = formatTimestampToVNTime(timestamp);
+            console.log("ID: ",mess.user_id._id);
+            console.log(message);
+            
             if(mess.user_id._id === currentUserId){                
                 chatMessage.innerHTML += `
                     <div class="message sent">
@@ -177,23 +179,25 @@ async function getMessage() {
 }
 
 async function sendMessage() {
-        const btnSend = document.querySelector('.btn-send');
-        btnSend?.addEventListener('click', async () => {
-            const contentMess = document.getElementById('send-message').value;
-            if (!contentMess) return;
-            try {
-                await ajaxRequest('/messages/send-message', 'POST', 
-                    {   
-                        content: contentMess, 
-                        user_id: currentUserId, 
-                        department_id: currentDepartmentId  
-                    });
-                getMessage();
-                document.getElementById('send-message').value = '';
-            } catch (error) {
-                console.log('Error: ' + error.message);
-            }
-        })
+    const btnSend = document.querySelector('.btn-send');
+    btnSend?.addEventListener('click', async () => {
+        const contentMess = document.getElementById('send-message').value;
+        if (!contentMess || !currentDepartmentId) return;  
+
+        console.log('Sending message to department:', currentDepartmentId);
+
+        try {
+            await ajaxRequest('/messages/send-message', 'POST', {
+                content: contentMess, 
+                user_id: currentUserId, 
+                department_id: currentDepartmentId 
+            });
+            getMessage();
+            document.getElementById('send-message').value = '';
+        } catch (error) {
+            console.log('Error: ' + error.message);
+        }
+    });
 }
 
 function main(){

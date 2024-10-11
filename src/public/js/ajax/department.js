@@ -1,6 +1,7 @@
 import { ajaxRequest } from './apiHelper.js';
 
 var currentUserId = null;
+var selectedId = null;
 
 async function displayUserName() {
     try {
@@ -28,9 +29,8 @@ function formatTimestampToVNTime(timestamp) {
     return formattedTime;
 }
 
-async function getDepartments() {
+async function renderDepartment(departments) {
     try {
-        const departments = await ajaxRequest('/departments/list', 'GET');
         const departmentList = document.getElementById('listDepartment');
         departmentList.innerHTML = '';
         if (departments.length == 0) {
@@ -51,22 +51,113 @@ async function getDepartments() {
                         <td>${formattedTime}</td>
                         <td class="action">
                             <a href="#"><i class="fa-solid fa-eye"></i></a> |
-                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a> |
-                            <a class="btn-delete"><i class="fa-solid fa-trash-can"></i></a> 
+                            <a class="btn-edit" data-id="${department._id}" data-name="${department.department_name}" data-user="${department.user_id._id}"><i class="fa-solid fa-pen-to-square"></i></a> |                            
+                            <a class="btn-delete" data-id="${department._id}"><i class="fa-solid fa-trash-can"></i></a> 
                         </td>
                     </tr>
                 `;
         });
+        addEditEvent();
+
         const btnDelete = document.querySelectorAll('.btn-delete');
         btnDelete.forEach(element => {
-            element.addEventListener('click', () => {
+            element.addEventListener('click', function() {
                 const modalDelete = document.querySelector('.modal-delete');
                 modalDelete.classList.add('show-confirm');
+                selectedId = this.getAttribute('data-id');
             });
         });
     } catch (error) {
+        console.log(error);
+    }
+}
+ 
+async function getDepartments() {
+    try {
+        const departments = await ajaxRequest('/department/departments', 'GET');
+        renderDepartment(departments);
+    } catch (error) {
         alert('Error: Cannot be displayed');
     }
+}
+
+async function updateDepartment() {
+    const updateUser = document.querySelector('.btn-submit');
+    updateUser.addEventListener('click', async () => {
+        const { departmentName, selectUsers } = getFormValues();
+        try {
+            if (selectedId) {
+                getDepartments();
+                const modalUpdate = document.querySelector('.modal-add');
+                modalUpdate.classList.remove('show-confirm');
+                await ajaxRequest(`/department/departments/${selectedId}`, 'PUT', 
+                    { 
+                        department_name: departmentName, 
+                        // selected_user_id: selectUsers
+                    });
+                selectedId = null;
+                }
+        } catch (error) {
+            console.log('Error: ' + error.message);
+        }
+    });
+}
+
+function addCreateEvent() {
+    const createButton = document.querySelector('.filter-user .add');
+    const title = document.querySelector('.modal-add .title h2');
+    const titleBtn = document.querySelector('.btn.btn-submit');
+
+    createButton.addEventListener('click', function() {
+        title.textContent = "Create New Department";
+        titleBtn.textContent = "Create Department";
+
+        resetForm();
+
+        selectedId = null;
+
+        const modalCreate = document.querySelector('.modal-add');
+        modalCreate.classList.add('show-confirm');
+    });
+}
+
+
+function addEditEvent() {
+    const btnEdit = document.querySelectorAll('.btn-edit');
+    const title = document.querySelector('.modal-add .title h2');
+    const titleBtn = document.querySelector('.btn.btn-submit');
+    btnEdit.forEach(element => {
+        element.addEventListener('click', function() {
+            const departmentId = this.getAttribute('data-id');
+            const departmentName = this.getAttribute('data-name');
+            const userId = this.getAttribute('data-user');
+
+            title.textContent = "Update Department";
+            titleBtn.textContent = "Update Department";
+            document.getElementById('department-name').value = departmentName;
+            document.getElementById('select-users').value = userId;
+            
+            const modalUpdate = document.querySelector('.modal-add');
+            modalUpdate.classList.add('show-confirm');
+            selectedId = departmentId;
+        });
+    });
+}
+
+async function addDeleteEvent() {
+    const confirmDelete = document.querySelector('.btn.yes');
+    confirmDelete.addEventListener('click', async () => {
+        try {
+            if (selectedId) {
+                document.querySelector('.modal-delete').classList.remove('show-confirm'); // Ẩn modal
+                getDepartments();
+                await ajaxRequest(`/department/departments/${selectedId}`, 'DELETE');
+                selectedId = null;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    });
 }
 
 async function selectUsers() {
@@ -94,26 +185,38 @@ async function getID() {
     }
 } 
 
-async function createDepartment() {
+function getFormValues() {
+    const departmentName = document.getElementById('department-name').value;
+    const selectUsers = document.getElementById('select-users').value;
+    return { departmentName, selectUsers };
+}
+
+async function handleDepartment() {
     const saveUser = document.querySelector('.btn-submit');
     saveUser.addEventListener('click', async () => {
-        const departmentName = document.getElementById('department-name').value;
-        const selectUsers = document.getElementById('select-users').value;
-
+        const { departmentName, selectUsers } = getFormValues();
         try {
-            await ajaxRequest('/departments/add', 'POST', 
-                { 
+            if (!selectedId) { 
+                await ajaxRequest('/department/departments', 'POST', { 
                     department_name: departmentName, 
                     user_id: currentUserId,
                     selected_user_id: selectUsers
                 });
-            getDepartments()
-            resetForm()
+            } else {
+                await ajaxRequest(`/department/departments/${selectedId}`, 'PUT', { 
+                    department_name: departmentName, 
+                    user_id: currentUserId,
+                    selected_user_id: selectUsers
+                });
+            }
+            getDepartments();
+            resetForm();
         } catch (error) {
             console.log('Error: ' + error.message);
         }
     });
 }
+
 
 async function resetForm() {
     document.getElementById('department-name').value = "";
@@ -124,7 +227,10 @@ function main(){
     displayUserName();
     getDepartments();
     selectUsers();
-    createDepartment();
+    handleDepartment();
+    addDeleteEvent();
+    addCreateEvent();
+    updateDepartment();
 }
 
 main();

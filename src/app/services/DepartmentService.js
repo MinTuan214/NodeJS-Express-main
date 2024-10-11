@@ -11,6 +11,16 @@ async function getDepartment() {
     }
 }
 
+async function getOneDepartment(id) {
+    try {
+        const department = await Department.findById(id)
+        .populate('user_id', 'name phone');
+        return department;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function createDepartment(data) {
     try {
         const department = new Department({
@@ -29,8 +39,37 @@ async function createDepartment(data) {
         return saveDepartment;
 
     } catch (error) {
-        
+        console.log(error);
     }
 }
 
-module.exports = { getDepartment, createDepartment }
+async function updateDepartment(id, data) {
+    try {
+        const department = await Department.findByIdAndUpdate(id, data, {new: true});
+        return department;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function deleteDepartment(id) {
+    try {
+        const department = await Department.findByIdAndDelete(id);
+        if (!department) {
+            throw new Error("Department not found");
+        }
+        return department;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+
+module.exports = { 
+        getDepartment, 
+        getOneDepartment, 
+        createDepartment, 
+        updateDepartment, 
+        deleteDepartment
+    }

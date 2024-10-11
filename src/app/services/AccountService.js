@@ -48,7 +48,7 @@ async function login(name, password) {
                     name: user.name
                 },
                 process.env.JWT_SECRET,
-                { expiresIn: "5m" }
+                { expiresIn: "15m" }
             )
             return { token }
         }
