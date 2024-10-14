@@ -1,4 +1,4 @@
-const User = require('../models/Auth');
+const User = require('../models/Account');
 require('dotenv').config();
 
 async function getUser() {

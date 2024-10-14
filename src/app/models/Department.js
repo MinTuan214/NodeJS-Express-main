@@ -5,7 +5,7 @@ const Department = new Schema({
     department_name: { type:String },
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Auth'
+        ref: 'Account'
     }
 },{
     timestamps: true,

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const User_department = new Schema({
     user_id: { 
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Auth'
+        ref: 'Account'
     },
     department_id: { 
         type: mongoose.Schema.Types.ObjectId,

@@ -5,7 +5,7 @@ const Message = new Schema({
     content: { type:String },
     user_id: {
         type: String,
-        ref: 'Auth'
+        ref: 'Account'
     },
     department_id: {
         type: String,
