@@ -41,17 +41,16 @@ async function login(name, password) {
         if (!validPassword) {
             return { success: false, message: "Wrong password!" };;
         }
-        if (user) {
-            const token = jwt.sign(
-                {
-                    _id: user._id,
-                    name: user.name
-                },
-                process.env.JWT_SECRET,
-                { expiresIn: "15m" }
-            )
-            return { token }
-        }
+        const token = jwt.sign(
+            {
+                _id: user._id,
+                name: user.name
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: "15m" }
+        );
+
+        return { success: true, token };
 
     } catch (error) {
         console.log(error);

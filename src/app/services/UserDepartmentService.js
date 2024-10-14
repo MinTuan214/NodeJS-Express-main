@@ -1,4 +1,4 @@
-const User_department = require('../models/User_department');
+const User_department = require('../models/UserDepartment');
 const Department = require('../models/Department');
 
 async function getUserDepartment(userID) {

@@ -1,11 +1,11 @@
 const path = require("path");
 const express = require("express");
+require('dotenv').config();
 const { engine } = require("express-handlebars");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-const port1 = 3005;
-const port2 = 3000;
+const port = process.env.PORT_RUN_MAIN;
 
 const db = require("./config/db");
 const route = require("./routes");
@@ -29,11 +29,8 @@ async function main() {
   try {
     await db.connect();
 
-    app.listen(port1, () => {
-      console.log(`App listening on port1 http://localhost:${port1}`);
-    });
-    app.listen(port2, () => {
-      console.log(`App listening on port2 http://localhost:${port2}`);
+    app.listen(port, () => {
+      console.log(`App listening on port1 http://localhost:${port}`);
     });
   } catch (error) {
     console.log("Failed to connect to the database:", error);

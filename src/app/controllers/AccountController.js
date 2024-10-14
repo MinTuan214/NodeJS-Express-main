@@ -1,4 +1,3 @@
-const { json } = require('express');
 const userService = require('../services/AccountService');
 
 function index(req, res) {
@@ -21,7 +20,7 @@ async function store(req, res) {
 async function login(req, res) {
     try {
         const user = await userService.login(req.body.name, req.body.password);
-        if(user){
+        if(user.success){
             res.cookie('token', user.token, {
                 httpOnly: true, 
                 secure: false,
@@ -32,13 +31,13 @@ async function login(req, res) {
                 name: req.body.name,
             });
         }else{
-            return json("Fail");
+            return res.status(401).json({ message: 'Invalid credentials' });
         }
     } catch (error) {
         if (error.message === "Wrong username!") {
-            return res.status(404).json(error.message);
+            return res.status(401).json(error.message);
         } else if (error.message === "Wrong password!") {
-            return res.status(404).json(error.message);
+            return res.status(401).json(error.message);
         } else {
             return res.status(500).json(error);
         }

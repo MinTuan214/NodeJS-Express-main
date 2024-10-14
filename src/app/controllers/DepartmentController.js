@@ -63,7 +63,6 @@ async function deleteDepartment(req, res) {
     }
 }
 
-
 module.exports = { 
     index, 
     getDepartment,

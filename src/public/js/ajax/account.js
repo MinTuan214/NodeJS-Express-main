@@ -30,7 +30,7 @@ async function login() {
             const response = await ajaxRequest('/login', 'POST', { name, password });
             if (response) {
                 setCookie('token', response.token, 1);
-                window.location.href = '/department';
+                window.location.href = '/departments';
             }
         } catch (error) {
             alert("Login error");

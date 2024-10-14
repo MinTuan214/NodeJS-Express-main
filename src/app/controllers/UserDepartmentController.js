@@ -1,4 +1,4 @@
-const User_department = require('../services/User_departmentService');
+const User_department = require('../services/UserDepartmentService');
 const jwt = require('jsonwebtoken');
 
 async function getUserDepartment(req, res) {

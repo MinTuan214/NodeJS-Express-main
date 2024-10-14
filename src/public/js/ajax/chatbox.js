@@ -1,4 +1,4 @@
-import { ajaxRequest, setCookie, getCookie } from './apiHelper.js';
+import { ajaxRequest } from './apiHelper.js';
 import { chooseUser } from '../script.js';
 
 var currentUserId = null;
@@ -59,7 +59,7 @@ async function chooseDepartment(department) {
 
 async function getUserChat() {
     try {
-        const userDepartments = await ajaxRequest('/userdepartments', 'GET');
+        const userDepartments = await ajaxRequest('/userdepartments/list', 'GET');
         const listUser = document.querySelector('.box-list-user');
         listUser.innerHTML = '';
 
@@ -136,9 +136,7 @@ async function getID() {
 
 async function getMessage() {
     try {
-        const message = await ajaxRequest(`message/messages/${currentDepartmentId}`, 'GET');
-        console.log("Fetched messages:", message);
-        
+        const message = await ajaxRequest(`messages/${currentDepartmentId}`, 'GET');
         const chatMessage = document.querySelector('.chat-messages');
         chatMessage.innerHTML = '';
         message.reverse().forEach(mess => {
@@ -167,7 +165,7 @@ async function getMessage() {
                             </div>
                     </div>                
                 `;
-            } 
+            }   
             chatMessage.scrollTop = chatMessage.scrollHeight; 
         });
     } catch (error) {
@@ -184,7 +182,7 @@ async function sendMessage() {
         console.log('Sending message to department:', currentDepartmentId);
 
         try {
-            await ajaxRequest('message/messages', 'POST', {
+            await ajaxRequest('messages', 'POST', {
                 content: contentMess, 
                 user_id: currentUserId, 
                 department_id: currentDepartmentId 

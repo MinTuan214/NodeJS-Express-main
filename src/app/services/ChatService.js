@@ -1,6 +1,6 @@
 const Chat = require('../models/Message');
 const Department = require('../models/Department');
-const User_department = require('../models/User_department');
+const User_department = require('../models/UserDepartment');
 
 async function getMessage(departmentId) {
     try {

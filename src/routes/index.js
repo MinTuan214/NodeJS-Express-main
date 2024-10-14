@@ -1,16 +1,16 @@
 const messageRoute = require('./chatbox');
 const accountRoute = require('./account');
-const authRoute = require('./user_infor');
+const authRoute = require('./auth');
 const departmentRoute = require('./department');
-const userDepartmentRoute = require('./user_department');
+const userDepartmentRoute = require('./userDepartment');
 const middlewareAuth = require('../app/middleware/AuthMiddleware');
 
 
 function route(app){
-    app.use('/message', middlewareAuth.authenticateToken, messageRoute);
-    app.use('/auth', middlewareAuth.authenticateToken, authRoute);
+    app.use('/messages', middlewareAuth.authenticateToken, messageRoute);
     app.use('/userdepartments', middlewareAuth.authenticateToken, userDepartmentRoute);
-    app.use('/department', middlewareAuth.authenticateToken, departmentRoute);
+    app.use('/departments', middlewareAuth.authenticateToken, departmentRoute);
+    app.use('/auth',middlewareAuth.authenticateToken, authRoute);
     app.use('/', accountRoute);
 }
 

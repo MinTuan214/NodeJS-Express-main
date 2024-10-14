@@ -1,5 +1,5 @@
 const Department = require('../models/Department');
-const User_department = require('../models/User_department');
+const User_department = require('../models/UserDepartment');
 
 async function getDepartment() {
     try {
@@ -54,6 +54,7 @@ async function updateDepartment(id, data) {
 
 async function deleteDepartment(id) {
     try {
+        
         const department = await Department.findByIdAndDelete(id);
         if (!department) {
             throw new Error("Department not found");

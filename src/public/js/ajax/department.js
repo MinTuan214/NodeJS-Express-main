@@ -74,7 +74,7 @@ async function renderDepartment(departments) {
  
 async function getDepartments() {
     try {
-        const departments = await ajaxRequest('/department/departments', 'GET');
+        const departments = await ajaxRequest('/departments/list', 'GET');
         renderDepartment(departments);
     } catch (error) {
         alert('Error: Cannot be displayed');
@@ -90,7 +90,7 @@ async function updateDepartment() {
                 getDepartments();
                 const modalUpdate = document.querySelector('.modal-add');
                 modalUpdate.classList.remove('show-confirm');
-                await ajaxRequest(`/department/departments/${selectedId}`, 'PUT', 
+                await ajaxRequest(`/departments/${selectedId}`, 'PUT', 
                     { 
                         department_name: departmentName, 
                         selected_user_id: selectUsers
@@ -149,9 +149,9 @@ async function addDeleteEvent() {
     confirmDelete.addEventListener('click', async () => {
         try {
             if (selectedId) {
-                document.querySelector('.modal-delete').classList.remove('show-confirm'); // Ẩn modal
+                document.querySelector('.modal-delete').classList.remove('show-confirm');
                 getDepartments();
-                await ajaxRequest(`/department/departments/${selectedId}`, 'DELETE');
+                await ajaxRequest(`departments/${selectedId}`, 'DELETE');
                 selectedId = null;
             }
         } catch (error) {
@@ -162,7 +162,7 @@ async function addDeleteEvent() {
 
 async function selectUsers() {
     try {
-        const users = await ajaxRequest('/message/messages', 'GET');
+        const users = await ajaxRequest('/messages/list', 'GET');
         const select = document.getElementById("select-users");
         select.innerHTML = '';
         users.forEach(user => {
@@ -196,13 +196,13 @@ async function handleDepartment() {
         const { departmentName, selectUsers } = getFormValues();
         try {
             if (!selectedId) { 
-                await ajaxRequest('/department/departments', 'POST', { 
+                await ajaxRequest('/departments', 'POST', { 
                     department_name: departmentName, 
                     user_id: currentUserId,
                     selected_user_id: selectUsers
                 });
             } else {
-                await ajaxRequest(`/department/departments/${selectedId}`, 'PUT', { 
+                await ajaxRequest(`/departments/${selectedId}`, 'PUT', { 
                     department_name: departmentName, 
                     user_id: currentUserId,
                     selected_user_id: selectUsers
