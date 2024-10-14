@@ -5,7 +5,7 @@ var selectedId = null;
 
 async function displayUserName() {
     try {
-        const response = await ajaxRequest('auth/user-info', 'GET');
+        const response = await ajaxRequest('/api/auth/user-info', 'GET');
         const userNameElement = document.getElementById('list-of');
         if (userNameElement && response.name) {
             userNameElement.textContent = response.name;
@@ -74,7 +74,7 @@ async function renderDepartment(departments) {
  
 async function getDepartments() {
     try {
-        const departments = await ajaxRequest('/departments/list', 'GET');
+        const departments = await ajaxRequest('/api/departments/', 'GET');
         renderDepartment(departments);
     } catch (error) {
         alert('Error: Cannot be displayed');
@@ -90,7 +90,7 @@ async function updateDepartment() {
                 getDepartments();
                 const modalUpdate = document.querySelector('.modal-add');
                 modalUpdate.classList.remove('show-confirm');
-                await ajaxRequest(`/departments/${selectedId}`, 'PUT', 
+                await ajaxRequest(`/api/departments/${selectedId}`, 'PUT', 
                     { 
                         department_name: departmentName, 
                         selected_user_id: selectUsers
@@ -151,7 +151,7 @@ async function addDeleteEvent() {
             if (selectedId) {
                 document.querySelector('.modal-delete').classList.remove('show-confirm');
                 getDepartments();
-                await ajaxRequest(`departments/${selectedId}`, 'DELETE');
+                await ajaxRequest(`/api/departments/${selectedId}`, 'DELETE');
                 selectedId = null;
             }
         } catch (error) {
@@ -162,7 +162,7 @@ async function addDeleteEvent() {
 
 async function selectUsers() {
     try {
-        const users = await ajaxRequest('/messages/list', 'GET');
+        const users = await ajaxRequest('/api/messages', 'GET');
         const select = document.getElementById("select-users");
         select.innerHTML = '';
         users.forEach(user => {
@@ -177,7 +177,7 @@ async function selectUsers() {
 
 async function getID() {
     try {
-        const response = await ajaxRequest('auth/user-id', 'GET');
+        const response = await ajaxRequest('/api/auth/user-id', 'GET');
         currentUserId = response.id;
     } catch (error) {
         console.log('Error fetching user ID:', error);
@@ -196,13 +196,13 @@ async function handleDepartment() {
         const { departmentName, selectUsers } = getFormValues();
         try {
             if (!selectedId) { 
-                await ajaxRequest('/departments', 'POST', { 
+                await ajaxRequest('/api/departments', 'POST', { 
                     department_name: departmentName, 
                     user_id: currentUserId,
                     selected_user_id: selectUsers
                 });
             } else {
-                await ajaxRequest(`/departments/${selectedId}`, 'PUT', { 
+                await ajaxRequest(`/api/departments/${selectedId}`, 'PUT', { 
                     department_name: departmentName, 
                     user_id: currentUserId,
                     selected_user_id: selectUsers

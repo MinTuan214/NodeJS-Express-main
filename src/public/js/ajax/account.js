@@ -11,7 +11,7 @@ async function register() {
         const password = document.getElementById('password').value;
 
         try {
-            await ajaxRequest('/store', 'POST', { name, email, phone, password });
+            await ajaxRequest('/api/store', 'POST', { name, email, phone, password });
             resetform();
             alert("Register successfully!")
         } catch (error) {
@@ -27,7 +27,7 @@ async function login() {
         const name = document.getElementById('name').value;
         const password = document.getElementById('password').value;
         try {
-            const response = await ajaxRequest('/login', 'POST', { name, password });
+            const response = await ajaxRequest('/api/login', 'POST', { name, password });
             if (response) {
                 setCookie('token', response.token, 1);
                 window.location.href = '/departments';
