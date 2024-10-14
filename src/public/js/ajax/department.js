@@ -5,7 +5,7 @@ var selectedId = null;
 
 async function displayUserName() {
     try {
-        const response = await ajaxRequest('/api/auth/user-info', 'GET');
+        const response = await ajaxRequest('/api/account/user-info', 'GET');
         const userNameElement = document.getElementById('list-of');
         if (userNameElement && response.name) {
             userNameElement.textContent = response.name;
@@ -74,7 +74,7 @@ async function renderDepartment(departments) {
  
 async function getDepartments() {
     try {
-        const departments = await ajaxRequest('/api/departments/', 'GET');
+        const departments = await ajaxRequest('api/departments', 'GET');
         renderDepartment(departments);
     } catch (error) {
         alert('Error: Cannot be displayed');
@@ -177,7 +177,7 @@ async function selectUsers() {
 
 async function getID() {
     try {
-        const response = await ajaxRequest('/api/auth/user-id', 'GET');
+        const response = await ajaxRequest('/api/account/user-id', 'GET');
         currentUserId = response.id;
     } catch (error) {
         console.log('Error fetching user ID:', error);
@@ -196,13 +196,13 @@ async function handleDepartment() {
         const { departmentName, selectUsers } = getFormValues();
         try {
             if (!selectedId) { 
-                await ajaxRequest('/api/departments', 'POST', { 
+                await ajaxRequest('api/departments', 'POST', { 
                     department_name: departmentName, 
                     user_id: currentUserId,
                     selected_user_id: selectUsers
                 });
             } else {
-                await ajaxRequest(`/api/departments/${selectedId}`, 'PUT', { 
+                await ajaxRequest(`api/departments/${selectedId}`, 'PUT', { 
                     department_name: departmentName, 
                     user_id: currentUserId,
                     selected_user_id: selectUsers

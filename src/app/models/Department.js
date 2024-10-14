@@ -5,11 +5,11 @@ const Department = new Schema({
     department_name: { type:String },
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Account'
+        ref: 'Auth'
     }
 },{
     timestamps: true,
-    collection: 'departments'
+    collection: 'Department'
 })
 
-module.exports = mongoose.model('departments', Department);
+module.exports = mongoose.model('Department', Department);

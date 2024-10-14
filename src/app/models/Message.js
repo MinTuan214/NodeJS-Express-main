@@ -5,15 +5,15 @@ const Message = new Schema({
     content: { type:String },
     user_id: {
         type: String,
-        ref: 'Account'
+        ref: 'Auth'
     },
     department_id: {
         type: String,
-        ref: 'departments'
+        ref: 'Department'
     }
 },{
     timestamps: true,
-    collection: 'messages'
+    collection: 'Message'
 })
 
-module.exports = mongoose.model('messages', Message);
+module.exports = mongoose.model('Message', Message);

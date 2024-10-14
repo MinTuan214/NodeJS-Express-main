@@ -1,8 +1,8 @@
-const ChatService = require('../services/ChatService');
+const ChatService = require('../services/MessageService');
 const jwt = require('jsonwebtoken');
 
 function index(req, res){
-    return res.render('chatbox/index')
+    return res.render('message/index')
 }
 
 async function getMessage(req, res) {

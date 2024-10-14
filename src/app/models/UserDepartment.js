@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 const User_department = new Schema({
     user_id: { 
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Account'
+        ref: 'Auth'
     },
     department_id: { 
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'departments'
+        ref: 'Department'
     }
 },{
     timestamps: true,
-    collection: 'user_departments'
+    collection: 'User_department'
 }) 
 
-module.exports = mongoose.model('user_departments', User_department);
+module.exports = mongoose.model('User_department', User_department);

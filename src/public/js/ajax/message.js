@@ -6,7 +6,7 @@ var currentDepartmentId = null;
 
 async function displayUserName() {
     try {
-        const response = await ajaxRequest('/api/auth/user-info', 'GET');
+        const response = await ajaxRequest('/api/account/user-info', 'GET');
         const userNameElement = document.getElementById('user-name');
         if (userNameElement && response.name) {
             userNameElement.textContent = response.name;
@@ -32,7 +32,7 @@ function formatTimestampToVNTime(timestamp) {
 
 async function logout() {
     try {
-        const response = await ajaxRequest('/api/logout', 'POST');
+        const response = await ajaxRequest('/api/auth/logout', 'POST');
         if (response.message === 'Logged out successfully') {
             window.location.href = '/';
         }
@@ -59,7 +59,7 @@ async function chooseDepartment(department) {
 
 async function getUserChat() {
     try {
-        const userDepartments = await ajaxRequest('/api/userdepartments', 'GET');
+        const userDepartments = await ajaxRequest('/api/user_departments', 'GET');
         const listUser = document.querySelector('.box-list-user');
         listUser.innerHTML = '';
 
@@ -127,7 +127,7 @@ async function getUserChat() {
 
 async function getID() {
     try {
-        const response = await ajaxRequest('/api/auth/user-id', 'GET');
+        const response = await ajaxRequest('/api/account/user-id', 'GET');
         currentUserId = response.id;
     } catch (error) {
         console.log('Error fetching user ID:', error);

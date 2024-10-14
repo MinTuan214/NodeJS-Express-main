@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Account = new Schema({
+const Auth = new Schema({
     name: {
         type: String,
         required: true
@@ -30,4 +30,4 @@ const Account = new Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Account', Account);
+module.exports = mongoose.model('Auth', Auth);

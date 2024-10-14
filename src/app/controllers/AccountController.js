@@ -1,56 +1,42 @@
-const userService = require('../services/AccountService');
+const UserInforService = require('../services/AccountService');
+const jwt = require('jsonwebtoken');
 
-function index(req, res) {
-    return res.render('auth/index');
-}
-
-async function register(req, res) {
-    return res.render('auth/register');
-}
-
-async function store(req, res) {
+async function getUser(req, res) {
     try {
-        const user = await userService.registerUser(req.body);
+        const user = await UserInforService.getUser();
         return res.json(user);
     } catch (error) {
         console.log(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
 }
 
-async function login(req, res) {
-    try {
-        const user = await userService.login(req.body.name, req.body.password);
-        if(user.success){
-            res.cookie('token', user.token, {
-                httpOnly: true, 
-                secure: false,
-            });
-            return res.json({
-                message: "Successfully!",
-                token: user.token,
-                name: req.body.name,
-            });
-        }else{
-            return res.status(401).json({ message: 'Invalid credentials' });
+async function getUserInfo(req, res) {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.status(401).json({ message: "Token not found" });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) {
+            return res.status(403).json({ message: "Invalid token" });
         }
-    } catch (error) {
-        if (error.message === "Wrong username!") {
-            return res.status(401).json(error.message);
-        } else if (error.message === "Wrong password!") {
-            return res.status(401).json(error.message);
-        } else {
-            return res.status(500).json(error);
+        return res.json({ name: user.name });
+    });
+}
+
+function getIduser(req, res) {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.status(401).json({ message: "Token not found" });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) {
+            return res.status(403).json({ message: "Invalid token" });
         }
-    }
+        return res.json({ id: user._id });
+    });
 }
 
-async function logout(req, res) {
-    try {
-        res.clearCookie('token');
-        return res.json({ message: 'Logged out successfully' });
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-module.exports = { register, store, login, logout, index};
+module.exports = { getUser, getUserInfo, getIduser }
